@@ -7,9 +7,9 @@ resource "aws_security_group" "rds_sg" {
     }
 
     ingress{
-        from_port = 3306
-        to_port = 3306
-        protocol = "tcp"
+        from_port = var.sql_port
+        to_port = var.sql_port
+        protocol = var.tcp_protocol
         security_groups = [var.wordpress_sg_id]
     }
 

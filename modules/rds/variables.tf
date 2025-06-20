@@ -29,3 +29,13 @@ variable "wordpress_sg_id" {
     type = string
   
 }
+
+variable "sql_port" {
+    type = number
+  
+}
+
+variable "tcp_protocol" {
+    type = string
+  
+}

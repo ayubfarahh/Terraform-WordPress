@@ -9,14 +9,14 @@ resource "aws_security_group" "wordpress_sg" {
   ingress{
     from_port = var.http_ports
     to_port = var.http_ports
-    protocol = "tcp"
+    protocol = var.tcp_protocol
     cidr_blocks = var.cidr_allow
   }
 
   ingress{
     from_port = var.ssh_ports
     to_port = var.ssh_ports
-    protocol = "tcp"
+    protocol = var.tcp_protocol
     cidr_blocks = var.cidr_allow
   }
 

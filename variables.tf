@@ -24,3 +24,15 @@ variable "db_password" {
     sensitive = true
   
 }
+
+variable "sql_port" {
+    type = number
+    default = 3306
+  
+}
+
+variable "tcp_protocol" {
+    type = string
+    default = "tcp"
+  
+}
