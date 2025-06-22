@@ -45,15 +45,12 @@ resource "aws_instance" "wordpress" {
           apt update -y
           apt install apache2 php php-mysql wget unzip mysql-client -y
 
-          # Create the WordPress database
-          mysql -h ${var.db_host} -u ${var.db_user} -p${var.db_password} -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-
-          cd /var/www/html
           cd /var/www/html
           rm -f index.html
           wget https://wordpress.org/latest.tar.gz
           tar -xvzf latest.tar.gz
           cp -R wordpress/* .
+          rm -rf wordpress latest.tar.gz
           chown -R www-data:www-data /var/www/html
           chmod -R 755 /var/www/html
           rm -rf wordpress latest.tar.gz
