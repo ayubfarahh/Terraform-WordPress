@@ -49,3 +49,48 @@ variable "vpc_id" {
     type = string
   
 }
+
+variable "allocated_storage" {
+    type = string
+  
+}
+
+variable "instance_class" {
+    type = string
+  
+}
+
+variable "engine" {
+    type = string
+  
+}
+
+variable "engine_version" {
+    type = string
+  
+}
+
+
+variable "identifier" {
+    type = string
+  
+}
+
+variable "db_name" {
+    type = string
+  
+}
+
+variable "parameter_group_name" {
+    type = string  
+}
+
+variable "db_tag" {
+    type = string
+  
+}
+
+variable "rds_sg_name" {
+    type = string
+  
+}

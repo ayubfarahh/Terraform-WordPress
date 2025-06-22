@@ -1,8 +1,5 @@
 resource "aws_vpc" "vpc" {
-    cidr_block = "10.0.0.0/24"
-    tags = {
-      Name = "VPC"
-    }
+    cidr_block = var.vpc_cidr
 }
 
 resource "aws_internet_gateway" "igw" {
@@ -12,16 +9,16 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_subnet" "public_subnet" {
     vpc_id = aws_vpc.vpc.id
-    cidr_block = "10.0.0.0/25"
-    availability_zone = "eu-west-2a"
+    cidr_block = var.public_subnet_cidr
+    availability_zone = var.public_subnet_az
     map_public_ip_on_launch = true
   
 }
 
 resource "aws_subnet" "public_subnet_backup" {
     vpc_id = aws_vpc.vpc.id
-    cidr_block = "10.0.0.128/26"
-    availability_zone = "eu-west-2b"
+    cidr_block = var.public_subnet_backup_cidr
+    availability_zone = var.public_subnet_backup_az
     map_public_ip_on_launch = true
   
 }
@@ -48,7 +45,7 @@ resource "aws_route_table_association" "rt_association_backup" {
 
 resource "aws_db_subnet_group" "db_subnet" {
   name       = "db_subnet"
-  subnet_ids = [aws_subnet.public_subnet, aws_subnet.public_subnet_backup]
+  subnet_ids = [aws_subnet.public_subnet.id, aws_subnet.public_subnet_backup.id]
 
   tags = {
     Name = "My DB subnet group"

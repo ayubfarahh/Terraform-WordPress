@@ -1,10 +1,10 @@
 resource "aws_security_group" "rds_sg" {
-    name = "rds_sg"
+    name = var.rds_sg_name
     description = "Allow database access from EC2"
     vpc_id = var.vpc_id
 
     tags = {
-      Name = "rds_sg"
+      Name = var.rds_sg_name
     }
 
     ingress{
@@ -24,20 +24,20 @@ resource "aws_security_group" "rds_sg" {
 }
 
 resource "aws_db_instance" "rds_mysql" {
-  allocated_storage    = 10
-  db_name              = "wordpress"
-  engine               = "mysql"
-  engine_version       = "8.0"
-  instance_class       = "db.t3.micro"
+  allocated_storage    = var.allocated_storage
+  db_name              = var.db_name
+  engine               = var.engine
+  engine_version       = var.engine_version
+  instance_class       = var.instance_class
   username             = var.db_user
   password             = var.db_password
-  parameter_group_name = "default.mysql8.0"
+  parameter_group_name = var.parameter_group_name
   db_subnet_group_name = var.db_subnet_group
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
   tags = {
-    Name = "rds_mysql"
+    Name = var.db_tag
   }
 }
 

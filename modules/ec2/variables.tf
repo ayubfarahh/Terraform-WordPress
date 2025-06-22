@@ -39,5 +39,25 @@ variable "vpc_id" {
 
 variable "pub_subnet_id" {
   type = string
+
+}
+
+variable "ami" {
+  type = string
+  
+}
+
+variable "instance_type" {
+    type = string
+  
+}
+
+variable "wordpress_sg_name" {
+    type = string
+  
+}
+
+variable "wordpress_instance_name" {
+    type = string
   
 }

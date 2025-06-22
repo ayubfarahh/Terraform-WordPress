@@ -1,9 +1,9 @@
 resource "aws_security_group" "wordpress_sg" {
-  name = "allow_traffic"
+  name = var.wordpress_sg_name
   description = "Allow SSH and HTTP inbound and all outbound traffic"
   vpc_id =  var.vpc_id
   tags = {
-    Name = "allow_traffic"
+    Name = var.wordpress_sg_name
   }
 
   ingress{
@@ -29,12 +29,12 @@ resource "aws_security_group" "wordpress_sg" {
 }
 
 resource "aws_instance" "wordpress" {
-    ami = local.ami
-    instance_type = local.instance_type
+    ami = var.ami
+    instance_type = var.instance_type
     subnet_id = var.pub_subnet_id
     vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
     tags = {
-      Name = "Wordpress"
+      Name = var.wordpress_instance_name
     }
 
 
