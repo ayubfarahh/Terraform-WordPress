@@ -39,3 +39,13 @@ variable "tcp_protocol" {
     type = string
   
 }
+
+variable "db_subnet_group" {
+    type = string
+  
+}
+
+variable "vpc_id" {
+    type = string
+  
+}

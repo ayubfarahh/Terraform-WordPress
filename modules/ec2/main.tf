@@ -1,7 +1,7 @@
 resource "aws_security_group" "wordpress_sg" {
   name = "allow_traffic"
   description = "Allow SSH and HTTP inbound and all outbound traffic"
-
+  vpc_id =  var.vpc_id
   tags = {
     Name = "allow_traffic"
   }
@@ -31,11 +31,11 @@ resource "aws_security_group" "wordpress_sg" {
 resource "aws_instance" "wordpress" {
     ami = local.ami
     instance_type = local.instance_type
-  
-  vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
-  tags = {
-    Name = "Wordpress"
-  }
+    subnet_id = var.pub_subnet_id
+    vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
+    tags = {
+      Name = "Wordpress"
+    }
 
 
    user_data = <<-EOF

@@ -1,6 +1,7 @@
 resource "aws_security_group" "rds_sg" {
     name = "rds_sg"
     description = "Allow database access from EC2"
+    vpc_id = var.vpc_id
 
     tags = {
       Name = "rds_sg"
@@ -31,6 +32,7 @@ resource "aws_db_instance" "rds_mysql" {
   username             = var.db_user
   password             = var.db_password
   parameter_group_name = "default.mysql8.0"
+  db_subnet_group_name = var.db_subnet_group
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
